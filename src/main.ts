@@ -1,26 +1,34 @@
 import * as core from '@actions/core'
-import { wait } from './wait'
+import * as fs from 'fs'
+import { parse } from './parse'
+import { reportPR } from './report-pr'
 
-/**
- * The main function for the action.
- * @returns {Promise<void>} Resolves when the action is complete.
- */
-export async function run(): Promise<void> {
+async function run(): Promise<void> {
   try {
-    const ms: string = core.getInput('milliseconds')
+    const jsonPath = core.getInput('json-path', { required: true })
+    const prNumber = core.getInput('pr-number', { required: true })
 
-    // Debug logs are only output if the `ACTIONS_STEP_DEBUG` secret is true
-    core.debug(`Waiting ${ms} milliseconds ...`)
+    if (!prNumber) {
+      core.warning('PR number is not set.')
+      throw new Error('PR number is not set.')
+    }
 
-    // Log the current timestamp, wait, then log the new timestamp
-    core.debug(new Date().toTimeString())
-    await wait(parseInt(ms, 10))
-    core.debug(new Date().toTimeString())
+    try {
+      fs.accessSync(jsonPath, fs.constants.R_OK)
+    } catch (err) {
+      core.warning(`${jsonPath}: access error!`)
+      throw new Error(`${jsonPath}: access error!`)
+    }
 
-    // Set outputs for other workflow steps to use
-    core.setOutput('time', new Date().toTimeString())
+    const result = parse(jsonPath)
+    core.info(result.summary)
+
+    await reportPR(result)
   } catch (error) {
-    // Fail the workflow run if an error occurs
-    if (error instanceof Error) core.setFailed(error.message)
+    if (error instanceof Error) {
+      core.setFailed(error.message)
+    }
   }
 }
+
+run()
