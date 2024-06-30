@@ -50,4 +50,4 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           json-path: ./__tests__/sample_data/results.json
-          pr-number: 1
+          pr-number: 2
