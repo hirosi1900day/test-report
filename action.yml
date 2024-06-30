@@ -1,23 +1,24 @@
-name: "RSpec Report"
-description: "RSpec Report ref https://github.com/SonicGarden/rspec-report-action"
+name: 'RSpec Report'
+description:
+  'RSpec Report ref https://github.com/SonicGarden/rspec-report-action'
 branding:
   icon: alert-triangle
   color: red
-author: ""
+author: ''
 inputs:
   token:
-    description: "Github token"
+    description: 'Github token'
     required: true
   json-path:
-    description: "JSON File path"
+    description: 'JSON File path'
     required: true
   pr-number:
-    description: "Pull Request Number"
+    description: 'Pull Request Number'
     required: true
   title:
-    description: "Title"
-    default: "# :cold_sweat: RSpec failure"
+    description: 'Title'
+    default: '# :cold_sweat: RSpec failure'
     required: false
 runs:
-  using: "node20"
-  main: "dist/index.js"
+  using: 'node20'
+  main: 'dist/index.js'
