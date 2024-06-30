@@ -1,24 +1,23 @@
-name: 'The name of your action here'
-description: 'Provide a description here'
-author: 'Your name or organization here'
-
-# Add your action's branding here. This will appear on the GitHub Marketplace.
+name: "RSpec Report"
+description: "RSpec Report ref https://github.com/SonicGarden/rspec-report-action"
 branding:
-  icon: 'heart'
-  color: 'red'
-
-# Define your inputs here.
+  icon: alert-triangle
+  color: red
+author: ""
 inputs:
-  milliseconds:
-    description: 'Your input description here'
+  token:
+    description: "Github token"
     required: true
-    default: '1000'
-
-# Define your outputs here.
-outputs:
-  time:
-    description: 'Your output description here'
-
+  json-path:
+    description: "JSON File path"
+    required: true
+  pr-number:
+    description: "Pull Request Number"
+    required: true
+  title:
+    description: "Title"
+    default: "# :cold_sweat: RSpec failure"
+    required: false
 runs:
-  using: node20
-  main: dist/index.js
+  using: "node20"
+  main: "dist/index.js"
