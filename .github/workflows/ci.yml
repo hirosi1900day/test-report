@@ -54,6 +54,8 @@ jobs:
         uses: ./
         with:
           milliseconds: 2000
+          json-path: ./__tests__/sample_data/results.json
+          pr-number: 1
 
       - name: Print Output
         id: output
