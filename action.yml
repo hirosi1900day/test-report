@@ -1,6 +1,6 @@
 name: 'RSpec Report'
 description:
-  'RSpec Report ref https://github.com/SonicGarden/rspec-report-action'
+  'RSpec Report(ref https://github.com/SonicGarden/rspec-report-action)'
 branding:
   icon: alert-triangle
   color: red
